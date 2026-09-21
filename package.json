@@ -11,6 +11,13 @@
     "main": "./dist/index.cjs",
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
+    "typesVersions": {
+        "*": {
+            "server": [
+                "./dist/server/index.d.ts"
+            ]
+        }
+    },
     "exports": {
         ".": {
             "import": {
@@ -45,7 +52,7 @@
         "typecheck": "tsc --noEmit",
         "test": "vitest run",
         "test:watch": "vitest",
-        "lint:pkg": "publint && attw --pack .",
+        "lint:pkg": "node scripts/lint-pkg.mjs",
         "prepublishOnly": "npm run typecheck && npm run test && npm run build && npm run smoke && npm run lint:pkg",
         "smoke": "node scripts/smoke.mjs && tsc -p scripts/tsconfig.smoke.json"
     },
@@ -61,7 +68,7 @@
         }
     },
     "devDependencies": {
-        "@arethetypeswrong/cli": "^0.17.0",
+        "@arethetypeswrong/cli": "^0.18.5",
         "@types/node": "^22.0.0",
         "hono": "^4.13.4",
         "publint": "^0.3.0",
@@ -76,5 +83,8 @@
         "api",
         "typescript",
         "oauth"
-    ]
+    ],
+    "publishConfig": {
+        "access": "public"
+    }
 }
